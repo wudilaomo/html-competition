@@ -1,0 +1,46 @@
+{
+    "name": "vue-demo",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "eslint": "eslint . --fix",
+        "prettier": "prettier . --write",
+        "prepare": "husky install",
+        "lint:lint-staged": "lint-staged"
+    },
+    "lint-staged": {
+        "*.{js,cjs,mjs,jsx,ts,tsx,html,vue}": [
+            "prettier --write"
+        ],
+        "*.{css,scss,less,styl}": [
+            "prettier --write"
+        ],
+        "*.{json,yml,yaml}": [
+            "prettier --write"
+        ],
+        "*.md": [
+            "prettier --write"
+        ]
+    },
+    "dependencies": {
+        "@vuesax-alpha/icons-vue": "^0.0.2-beta.12",
+        "element-plus": "^2.6.3",
+        "jszip": "^3.10.1",
+        "vue": "^3.4.19",
+        "vue-router": "4",
+        "vuesax-alpha": "^0.2.0-beta.73"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-vue": "^5.0.4",
+        "eslint": "^8.57.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.3",
+        "husky": "^9.0.11",
+        "lint-staged": "^15.2.2",
+        "prettier": "3.2.5",
+        "vite": "^5.2.7"
+    }
+}
