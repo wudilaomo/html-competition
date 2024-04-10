@@ -16,8 +16,6 @@
     box-sizing: border-box;
 }
 
-
-
 @keyframes Gradient {
     0% {
         background-position: 0% 0%;
@@ -48,7 +46,7 @@
 
     display: flex; /* 使用Flexbox布局 */
     flex-direction: column; /* 主轴方向为垂直方向 */
-    
+
     align-items: center; /* 垂直居中 */
 
     overflow: auto;

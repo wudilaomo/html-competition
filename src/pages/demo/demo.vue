@@ -2,25 +2,45 @@
     <div class="container">
         <vs-navbar v-model="active" center-collapsed>
             <template #left>
-                <img src="/public/gdmu.jpg" class="logo" alt="image1" />
-                <img src="/public/yigong.jpeg" class="title" />
+                <div class="title-container">
+                    <h1 class="main-title">医工融合创新网</h1>
+                </div>
             </template>
             <template #default>
                 <div class="NavBan">
                     <div class="ui-component" style="position: absolute; top: 15px; left: 350px">
                         <!-- UI组件的内容 -->
-                        <vs-navbar-item id="guide">TOP主页</vs-navbar-item>
-                        <vs-navbar-item id="docs">NEW政策</vs-navbar-item>
-                        <vs-navbar-item id="components">SEARCH成果</vs-navbar-item>
-                        <vs-navbar-item id="license">SCI文献</vs-navbar-item>
+                        <vs-navbar-item id="guide">
+                            <el-icon style="font-size: 15px"><House /></el-icon>
+                            TOP主页
+                        </vs-navbar-item>
+                        <vs-navbar-item id="docs">
+                            <el-icon style="font-size: 15px"><Grid /></el-icon>
+                            NEW政策
+                        </vs-navbar-item>
+                        <vs-navbar-item id="components">
+                            <el-icon style="font-size: 15px"><Tickets /></el-icon>
+                            SEARCH成果
+                        </vs-navbar-item>
+                        <vs-navbar-item id="license">
+                            <el-icon style="font-size: 15px"><DocumentChecked /></el-icon>
+                            SCI文献
+                        </vs-navbar-item>
                     </div>
                 </div>
             </template>
 
             <template #right>
-                <vs-checkbox v-model="option">Option</vs-checkbox>
-                <vs-input v-model="value6" color="#7D33FF" placeholder="Search About 医工融合" />
-                <vs-button>登录</vs-button>
+                <vs-input v-model="value6" color="#7D33FF" placeholder="Search About 医工融合">
+                    <template #append>
+                        <el-icon class="search-icon" style="color: #7d33ff"><Search /></el-icon>
+                    </template>
+                </vs-input>
+                <el-button type="primary" color="#95d475" class="button-with-margin" @click="goManager">Manager</el-button>
+                <vs-button>
+                    Sign In
+                    <el-icon class="user_manager" style="font-size: 15px"><Avatar /></el-icon>
+                </vs-button>
             </template>
         </vs-navbar>
         <div class="elc">
@@ -30,36 +50,34 @@
                 </el-carousel-item>
             </el-carousel>
         </div>
-    </div>
-    <div class="column-card1">
-        <img src="../../../public/yigong.jpeg" class="card-image" alt="Column Image">
-        <div class="card-content">
-            <h2 class="card-title">政策新闻</h2>
-            <p class="card-description">关于医工融合</p>
-            <a href="#" class="read-more">阅读更多</a>
+        <div class="cardList">
+            <div class="Notice_table">
+                <NoticeTable></NoticeTable>
+            </div>
+            <div class="Notice_table2">
+                <NoticeTable2></NoticeTable2>
+            </div>
         </div>
     </div>
-    <div class="column-card2">
-        <img src="../../../public/yigong.jpeg" class="card-image" alt="Column Image">
-        <div class="card-content">
-            <h2 class="card-title">研究成果</h2>
-            <p class="card-description">文献库</p>
-            <a href="#" class="read-more">阅读更多</a>
-        </div>
-    </div>
+
     <div class="chatgpt-image">
-    <a href="">
-        <img src="../../../public/5f1b4ff68012141270051c341fe264bd.jpeg" alt="ChatGPT Interface Image">
-    </a>
-</div>
+        <a href="">
+            <img src="../../../public/5f1b4ff68012141270051c341fe264bd.jpeg" alt="ChatGPT Interface Image" />
+        </a>
+    </div>
 </template>
 
 <script>
 import ImageSteam from './imageSteam.vue';
+import goManager from './manager.vue';
+import NoticeTable from './notice_table/notice_table.vue';
+import NoticeTable2 from './notice_table/notice_table2.vue';
 
 export default {
     components: {
-        ImageSteam
+        ImageSteam,
+        NoticeTable,
+        NoticeTable2
     },
     name: 'demo',
     data() {
@@ -74,27 +92,27 @@ export default {
             bannerList: [
                 {
                     id: '1',
-                    imgUrl: '../../public/AI.jpeg'
+                    imgUrl: '../../public/view.jpeg'
                 },
                 {
                     id: '2',
-                    imgUrl: '../../public/AI.jpeg'
+                    imgUrl: '../../public/technology.jpeg'
                 },
                 {
                     id: '3',
-                    imgUrl: '../../public/AI.jpeg'
+                    imgUrl: '../../public/mico.jpeg'
                 },
                 {
                     id: '4',
-                    imgUrl: '../../public/AI.jpeg'
+                    imgUrl: '../../public/meeting.jpg'
                 },
                 {
                     id: '5',
-                    imgUrl: '../../public/AI.jpeg'
+                    imgUrl: '../../public/medical.jpg'
                 },
                 {
                     id: '6',
-                    imgUrl: '../../public/AI.jpeg'
+                    imgUrl: '../../public/na.png'
                 }
             ]
         };
@@ -106,25 +124,20 @@ export default {
         async queryUserInfo(userId) {
             const userInfo = await user.getUserInfo({ userId });
             this.userInfo = userInfo[0];
+        },
+        goManager() {
+            this.$router.push('/Manager');
+            this.$emit('active');
         }
     }
 };
-
 </script>
 
 <style scoped>
-.logo {
-    width: 75px; /* 设置宽度 */
-    height: 70px; /* 设置高度 */
-}
-.title {
-    width: 150px;
-    height: 70px;
-}
 .elc {
     position: absolute;
     top: 150px;
-    width: 1300px;
+    width: 1500px;
     height: 200px;
 }
 .el-carousel__item h3 {
@@ -135,14 +148,6 @@ export default {
     text-align: center;
 }
 
-.el-carousel__item:nth-child(2n) {
-    background-color: #99a9bf;
-}
-
-.el-carousel__item:nth-child(2n + 1) {
-    background-color: #d3dce6;
-}
-
 .banner-item {
     margin: 0;
     height: 300px;
@@ -151,8 +156,9 @@ export default {
     background-repeat: no-repeat;
     background-size: cover;
 }
-.container{
-    background: linear-gradient(to bottom, #0072ff, #00c6ff, #00ffcc, #00ff99);
+.container {
+    background-color: #f4f4f4;
+    :rgb(73, 80, 96);
     /* 设置多种颜色值来创建渐变 */
     margin: 0;
     padding: 0;
@@ -166,7 +172,7 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: absolute;
     bottom: 25px;
-    left: 100px;    
+    left: 100px;
 }
 
 .card-image {
@@ -206,7 +212,7 @@ export default {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     position: absolute;
     bottom: 25px;
-    left: 700px;    
+    left: 700px;
 }
 
 .card-image {
@@ -241,7 +247,7 @@ export default {
 .chatgpt-image {
     position: fixed;
     bottom: 50px;
-    right: 50px;
+    right: 30px;
     z-index: 9999; /* 确保图片在其他内容上方显示 */
 }
 
@@ -250,5 +256,46 @@ export default {
     height: auto; /* 根据宽度自动调整高度 */
     border-radius: 50%; /* 圆形边框 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+.vs-navbar {
+    border-radius: 20px; /* 可选：添加边框圆角 */
+    padding: 5px; /* 可选：添加内边距 */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+}
+.button-with-margin {
+    margin-left: 20px; /* 调整按钮与右侧组件的间距为 20px，根据需要调整间距 */
+}
+.input-with-icon {
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    margin-left: 10px; /* 调整搜索图标距离输入框的间距，根据需要调整 */
+}
+
+.cardList {
+    width: 85vw;
+    height: 40vh;
+    position: absolute;
+    bottom: 50px;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.Notice_table {
+    width: 47%;
+    background-color: white; /* 调整背景颜色 */
+    padding: 20px; /* 调整内边距 */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 添加底部阴影效果 */
+    border-radius: 15px;
+}
+.Notice_table2 {
+    width: 47%;
+    background-color: white; /* 调整背景颜色 */
+    padding: 20px; /* 调整内边距 */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 添加底部阴影效果 */
+    border-radius: 15px;
 }
 </style>
