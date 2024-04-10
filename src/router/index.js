@@ -9,7 +9,32 @@ const routes = [
     {
         path: '/demo',
         name: 'demo',
-        component: () => import('../pages/demo/demo.vue')
+        component: () => import('../pages/demo/demo.vue'),
+        meta: {
+            demo: true
+        }
+    },
+    {
+        path: '/manager',
+        name: 'manager',
+        component: () => import('../pages/demo/manager.vue'),
+        redirect: '/manager/manager_table',
+        meta: {
+            manager: true
+        }
+    },
+    {
+        path: '/manager/manager_table',
+        name: 'manager_table',
+        component: () => import('../pages/demo/manager_table/manager_table.vue')
+    },
+    {
+        path: '/manager/manager_table2',
+        name: 'manager_table2',
+        component: () => import('../pages/demo/manager_table/manager_table2.vue'),
+        meta: {
+            manager: true
+        }
     }
 ];
 
