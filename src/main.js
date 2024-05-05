@@ -2,18 +2,18 @@ import { createApp } from 'vue';
 
 import ElementPlus from 'element-plus';
 import 'element-plus/dist/index.css';
-
+import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 import router from './router';
 
 import Vuesax from 'vuesax-alpha';
 import 'vuesax-alpha/theme-chalk/index.css';
 import 'vuesax-alpha/theme-chalk/dark/css-vars.css';
 import * as VuesaxAlphaIconsVue from '@vuesax-alpha/icons-vue';
-import * as ElementPlusIconsVue from '@element-plus/icons-vue';
 
 import './style.css';
 
 import App from './App.vue';
+
 
 const app = createApp(App);
 
@@ -30,10 +30,10 @@ app.use(ElementPlus)
     })
     .mount('#app');
 
-for (const [key, component] of Object.entries(VuesaxAlphaIconsVue)) {
-    app.component(`VsIcon${key}`, component);
-}
-
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component);
+}
+
+for (const [key, component] of Object.entries(VuesaxAlphaIconsVue)) {
+    app.component(`VsIcon${key}`, component);
 }

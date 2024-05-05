@@ -12,31 +12,28 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { User } from '@vuesax-alpha/icons-vue';
+import { defineComponent } from 'vue';
+import information from '../../../api/user'
 
-interface User {
-    time: string;
-    address: string;
-    content: string;
-    link: string;
-}
-
-export default defineComponent({
+export default{
     data() {
         return {
-            tableData: [
-                {
-                    time: '2016-05-03',
-                    address: '陈睿你*什么时候*啊',
-                    content: '你所热爱的，就是你的生活',
-                    link: 'https://www.bilibili.com'
-                }
-                // Add more data objects as needed
-            ] as User[]
+            tableData: [] // 初始化为空数组
         };
+    },
+    methods:{
+        async getDoc(){
+            const items = await information.getDoc();
+            this.tableData = items;
+        }
+    },
+    created () {
+        this.getDoc();
     }
-});
+};
 </script>
+
 
 <style>
 .table-title {

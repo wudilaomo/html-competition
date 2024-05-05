@@ -25,11 +25,11 @@
                 </vs-sidebar-item>
                 <vs-sidebar-group>
                     <template #header>
-                        <vs-sidebar-item arrow>
+                        <vs-sidebar-item arrow @click="goApi">
                             <template #icon>
-                                <i class="bx bx-group" />
+                                <i class="bx bx-group"  />
                             </template>
-                            API设置
+                            网站设置
                         </vs-sidebar-item>
                     </template>
 
@@ -72,7 +72,7 @@
                         <template #icon>
                             <i class="bx bxl-codepen" />
                         </template>
-                        ChatGpt接口
+                        ChatGPT接口
                     </vs-sidebar-item>
                     <vs-sidebar-item id="discord">
                         <template #icon>
@@ -113,6 +113,7 @@ import { routerKey } from 'vue-router';
 import manager_table from './manager_table/manager_table.vue';
 import manager_table2 from './manager_table/manager_table2.vue';
 import demo from './demo.vue';
+import api from './manager_table/Apisetting.vue'
 
 const router = useRouter();
 
@@ -141,6 +142,11 @@ function go_manager_table() {
 function Back() {
     router.push({
         name: 'demo'
+    });
+}
+function goApi(){
+    router.push({
+        name:'api'
     });
 }
 const page = ref(1);

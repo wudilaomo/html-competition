@@ -31,13 +31,10 @@
             </template>
 
             <template #right>
-                <vs-input v-model="value6" color="#7D33FF" placeholder="Search About 医工融合">
-                    <template #append>
-                        <el-icon class="search-icon" style="color: #7d33ff"><Search /></el-icon>
-                    </template>
-                </vs-input>
-                <el-button type="primary" color="#95d475" class="button-with-margin" @click="goManager">Manager</el-button>
-                <vs-button>
+                <vs-input v-model="value6" color="#7D33FF" placeholder="Search About 医工融合" class="input-with-icon" @keyup.enter="handleEnter"></vs-input>
+                <el-icon><Search /></el-icon>
+                <el-button v-if="this.$route.query.identify == '001'" type="primary" color="#95d475" class="button-with-margin" @click="goManager">Manager</el-button>
+                <vs-button @click="goUserSignIn">
                     Sign In
                     <el-icon class="user_manager" style="font-size: 15px"><Avatar /></el-icon>
                 </vs-button>
@@ -60,10 +57,8 @@
         </div>
     </div>
 
-    <div class="chatgpt-image">
-        <a href="">
-            <img src="../../../public/5f1b4ff68012141270051c341fe264bd.jpeg" alt="ChatGPT Interface Image" />
-        </a>
+    <div class="chatgpt-image" @click="goGpt">
+        <img src="../../../public/5f1b4ff68012141270051c341fe264bd.jpeg" alt="ChatGPT Interface Image" />
     </div>
 </template>
 
@@ -82,13 +77,9 @@ export default {
     name: 'demo',
     data() {
         return {
-            userId: '',
-            userInfo: {
-                userId: '',
-                userName: '',
-                gender: '',
-                age: ''
-            },
+            active: null,
+            value6: '',
+            identify: '', // 添加一个变量用来存储iden
             bannerList: [
                 {
                     id: '1',
@@ -120,14 +111,28 @@ export default {
     mounted() {
         // 在组件挂载后执行的代码
     },
+    created() {
+        this.identify = this.$route.query.identify;
+        console.log(this.$route.query.identify);
+    },
     methods: {
         async queryUserInfo(userId) {
             const userInfo = await user.getUserInfo({ userId });
             this.userInfo = userInfo[0];
         },
+
+        handleEnter(value6) {
+            // 在这里执行跳转操作，比如导航到搜索结果页面
+            this.$router.push('/search');
+        },
         goManager() {
             this.$router.push('/Manager');
-            this.$emit('active');
+        },
+        goGpt() {
+            this.$router.push('/manager/GPT');
+        },
+        goUserSignIn() {
+            this.$router.push('/user');
         }
     }
 };
@@ -245,17 +250,25 @@ export default {
     margin-top: 10px;
 }
 .chatgpt-image {
+    width: 100px;
+    border-radius: 50%;
     position: fixed;
     bottom: 50px;
     right: 30px;
     z-index: 9999; /* 确保图片在其他内容上方显示 */
+    transition: all 0.5s;
 }
 
 .chatgpt-image img {
-    width: 100px; /* 设置图片宽度 */
+    width: 100%; /* 设置图片宽度 */
     height: auto; /* 根据宽度自动调整高度 */
     border-radius: 50%; /* 圆形边框 */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+}
+.chatgpt-image:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+    cursor: pointer;
+    width: 110px;
 }
 .vs-navbar {
     border-radius: 20px; /* 可选：添加边框圆角 */
