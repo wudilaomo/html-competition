@@ -5,9 +5,11 @@
             最新政策审核
         </el-button>
     </div>
-    <el-table :data="filterTableData" style="width: 100%">
-        <el-table-column label="研究文献内容" prop="date" />
-        <el-table-column label="时间" prop="name" />
+    <el-table :data="tableData" style="width: 100%">
+        <el-table-column label="序号" prop="content_id" />
+        <el-table-column label="研究文献内容" prop="content" />
+        <el-table-column label="时间" prop="time" />
+        <el-table-column label="来源" prop="address" />
         <el-table-column align="right">
             <template #header>
                 <el-input v-model="search" size="small" placeholder="Type to search" />
@@ -19,93 +21,44 @@
         </el-table-column>
     </el-table>
     <div class="centercon_pagination">
-        <vs-pagination v-model:current-page="page" :layout="['total', 'prev', 'pager', 'next', 'jumper', 'sizes']" :total="50" />
+        <vs-pagination v-model:currentPage="currentPage" :layout="['total', 'prev', 'pager', 'next', 'jumper', 'sizes']" :total="50" />
     </div>
 </template>
 
-<script lang="ts" setup>
-import { computed, ref } from 'vue';
+<script>
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import ManagerTable1 from './manager_table.vue';
+import information from '../../../api/user';
 
-interface User {
-    date: string;
-    name: string;
-    address: string;
-}
-
-const search = ref('');
-const router = useRouter();
-const filterTableData = computed(() => tableData.filter((data) => !search.value || data.name.toLowerCase().includes(search.value.toLowerCase())));
-const handleEdit = (index: number, row: User) => {
-    console.log(index, row);
-};
-const handleDelete = (index: number, row: User) => {
-    console.log(index, row);
-};
-
-const tableData: User[] = [
-    {
-        date: '2016-05-03',
-        name: 'Tom',
-        address: 'No. 189, Grove St, Los Angeles'
+export default {
+    data() {
+        return {
+            search: '',
+            tableData: [],
+            currentPage: 1,
+            pageSize: 10
+        };
     },
-    {
-        date: '2016-05-02',
-        name: 'John',
-        address: 'No. 189, Grove St, Los Angeles'
+    methods: {
+        async getDoc() {
+            const items = await information.getDoc();
+            this.tableData = items;
+        },
+        goManagerTable1() {
+            this.$router.push({ name: 'manager_table' });
+        },
+        handleEdit(index, row) {
+            console.log(index, row);
+        },
+        handleDelete(index, row) {
+            console.log(index, row);
+        }
     },
-    {
-        date: '2016-05-04',
-        name: 'Morgan',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-01',
-        name: 'Jessy',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-05',
-        name: 'Emily',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-06',
-        name: 'Alex',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-07',
-        name: 'Sophia',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-08',
-        name: 'Oliver',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-09',
-        name: 'Lily',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-10',
-        name: 'Max',
-        address: 'No. 189, Grove St, Los Angeles'
-    },
-    {
-        date: '2016-05-11',
-        name: 'Ava',
-        address: 'No. 189, Grove St, Los Angeles'
+    mounted() {
+        this.getDoc();
     }
-    // 可以继续添加更多数据条目
-];
-function goManagerTable1() {
-    router.push({
-        name: 'manager_table'
-    });
-}
+};
 </script>
 
 <style>

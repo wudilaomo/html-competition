@@ -28,6 +28,7 @@
     "dependencies": {
         "@element-plus/icons-vue": "^2.3.1",
         "@vuesax-alpha/icons-vue": "^0.0.2-beta.12",
+        "axios": "^1.6.8",
         "element-plus": "^2.6.3",
         "jszip": "^3.10.1",
         "vue": "^3.4.19",

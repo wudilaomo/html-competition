@@ -12,23 +12,26 @@
 </template>
 
 <script lang="ts">
+import { User } from '@vuesax-alpha/icons-vue';
 import { defineComponent } from 'vue';
-import { User } from './types'; // 假设您有一个名为 types.ts 的类型文件
+import information from '../../../api/user'
 
-export default defineComponent({
+export default{
     data() {
         return {
-            tableData: [
-                {
-                    time: '2016-05-03',
-                    address: 'No. 189, Grove St, Los Angeles',
-                    content: 'Link to Google',
-                    link: 'https://www.google.com'
-                }
-            ] as User[]
+            tableData: [] // 初始化为空数组
         };
+    },
+    methods:{
+        async getGov(){
+            const items = await information.getGov();
+            this.tableData = items;
+        }
+    },
+    created () {
+        this.getGov();
     }
-});
+};
 </script>
 
 <style>

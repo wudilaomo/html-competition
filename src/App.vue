@@ -1,7 +1,10 @@
 <template>
     <div>
-        <demomanager v-if="!$route.meta.demo" />
-        <demo v-if="$route.meta.demo" @active="$route.meta.demo = true" />
+        <demomanager v-if="$route.meta.manager" />
+        <demo v-if="$route.meta.demo" />
+        <GPT v-if="$route.meta.gpt" />
+        <user v-if="$route.meta.user" />
+        <search v-if="$route.meta.search" />
     </div>
 </template>
 
@@ -9,15 +12,20 @@
 import demomanager from './pages/demo/manager.vue';
 import demo from './pages/demo/demo.vue';
 import manager_table2 from './pages/demo/manager_table/manager_table2.vue';
+import GPT from './pages/demo/manager_table/GptComponent.vue';
+import user from './pages/demo/SignIn/signIn.vue';
+import search from './pages/demo/search/search.vue';
 export default {
     name: 'App',
     components: {
         demomanager,
-        demo
+        demo,
+        GPT,
+        user,
+        search
     },
     data() {
         return {
-            isdemo: false
         };
     },
     created() {
