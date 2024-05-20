@@ -14,7 +14,7 @@
         </div>
         <div class="search">
             <div class="search_i">
-                <input class="searchInput"  v-model="keyWord" type="text" placeholder="Search for someting...." @keyup.enter="search" />
+                <input class="searchInput" v-model="keyWord" type="text" placeholder="Search for someting...." @keyup.enter="search" />
                 <vs-select v-model="value" placeholder="请选择" filter default-first-option style="border-radius: 10px">
                     <vs-option label="Vuesax" value="1">医学</vs-option>
                     <vs-option label="Vue" value="2">工学</vs-option>
@@ -24,7 +24,7 @@
                     <vs-option label="Webpack" value="6">高等数学</vs-option>
                     <vs-option label="Nodejs" value="7">计算机科学</vs-option>
                 </vs-select>
-                <vs-button size="large" :active="active == 1" @click="active = 1">Search</vs-button>
+                <vs-button size="large" :active="active == 1" @click="search">Search</vs-button>
             </div>
         </div>
         <div class="body">
@@ -38,203 +38,38 @@
                 <el-row>
                     <el-col :span="18">
                         <div style="height: 30px; width: 70%; position: absolute; top: 0; left: 0; color: #fff">Fixed Top Block</div>
-                        <div ref="containerRef" style="height: 800px; overflow-y: auto">
-                            <div class="part1" id="part1" style="height: 300px; background: rgba(255, 0, 0, 0.02); margin-top: 30px">
-                                <div class="center1">
-                                    <vs-card type="3" style="width: 500px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
-                                <div style="width: 10%"></div>
-                                <div class="center2">
-                                    <vs-card type="3" style="width: 600px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
-                            </div>
-                            <div class="part2" id="part2" style="height: 300px; background: rgba(0, 255, 0, 0.02); margin-top: 30px">
-                                <div class="center1">
-                                    <vs-card type="3" style="width: 500px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
-                                <div style="width: 10%"></div>
-                                <div class="center2">
-                                    <vs-card type="3" style="width: 600px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
-                            </div>
-                            <div class="part3" id="part3" style="height: 300px; background: rgba(0, 0, 255, 0.02); margin-top: 30px">
-                                <div class="center1">
-                                    <vs-card type="3" style="width: 500px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
-                                <div style="width: 10%"></div>
-                                <div class="center2">
-                                    <vs-card type="3" style="width: 600px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
-                            </div>
-                            <div class="part4" id="part4" style="height: 300px; background: rgba(0, 0, 255, 0.02); margin-top: 30px">
-                                <div class="center1">
-                                    <vs-card type="3" style="width: 500px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
-                                <div style="width: 10%"></div>
-                                <div class="center2">
-                                    <vs-card type="3" style="width: 600px">
-                                        <template #title>
-                                            <h3>Live a life of madness</h3>
-                                        </template>
-                                        <template #img>
-                                            <img src="../../../../public/na.png" alt="" />
-                                        </template>
-                                        <template #text>
-                                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.</p>
-                                        </template>
-                                        <template #interactions>
-                                            <vs-button color="danger" icon>
-                                                <i class="bx bx-heart" />
-                                            </vs-button>
-                                            <vs-button class="btn-chat" type="shadow">
-                                                <i class="bx bx-chat" />
-                                                <span class="span">54</span>
-                                            </vs-button>
-                                        </template>
-                                    </vs-card>
-                                </div>
+                        <div ref="containerRef" style="height: 900px; overflow-y: auto">
+                            <div class="center1" style="display: flex; flex-wrap: wrap; justify-content: center" id="part1">
+                                <vs-card v-for="item in respond" :key="item.id" type="3" style="width: 90%; height: 200px; margin: 20px; display: flex; justify-content: center" @click="handleCardClick(item.link)">
+                                    <template #title>
+                                        <h3>{{ item.content }}</h3>
+                                    </template>
+                                    <template #img>
+                                        <div class="image-container">
+                                            <img :src="item.img" class="card-image" alt="" />
+                                        </div>
+                                    </template>
+                                    <template #text>
+                                        <p>{{ item.address }}</p>
+                                    </template>
+                                    <template #interactions>
+                                        <vs-button color="danger" icon>
+                                            <i class="bx bx-heart" />
+                                        </vs-button>
+                                        <vs-button class="btn-chat" type="shadow">
+                                            <i class="bx bx-chat" />
+                                            <span class="span">{{ item.content_id }}</span>
+                                        </vs-button>
+                                    </template>
+                                </vs-card>
+                                <div id="part4"></div>
                             </div>
                         </div>
                     </el-col>
                     <el-col :span="6">
                         <el-anchor :container="containerRef" direction="vertical" type="default" :offset="30" @click="handleClick">
-                            <el-anchor-link href="#part1" title="part1" />
-                            <el-anchor-link href="#part2" title="part2" />
-                            <el-anchor-link href="#part3" title="part3" />
-                            <el-anchor-link href="#part4" title="part4" />
+                            <el-anchor-link href="#part1" title="滑倒顶部" />
+                            <el-anchor-link href="#part4" title="滑到底部" />
                         </el-anchor>
                     </el-col>
                 </el-row>
@@ -254,20 +89,16 @@ import information from '../../../api/user';
 
 import { VsNotification } from 'vuesax-alpha';
 
-
 export default {
     data() {
-        return{
-            keyWord:'',
-            title:'',
-            content:'',
-            picture:'',
-            link:''
-
-
-
+        return {
+            keyWord: '',
+            title: '',
+            content: '',
+            picture: '',
+            link: '',
+            respond: []
         };
-
     },
     methods: {
         handleButtonClick(duration) {
@@ -280,14 +111,30 @@ export default {
         },
         goHome() {
             this.$router.push('./demo');
+        },
+        async search(keyWord) {
+            if (keyWord != '') {
+                console.log('===========');
+                const items = await information.search(this.keyWord);
+                this.respond = items;
+                console.log(this.respond);
+            }
+        },
+        handleCardClick(link) {
+            // 在新标签页中打开链接
+            window.open(link, '_blank');
         }
+    },
+    created() {
+        this.keyWord = this.$route.query.keyWord;
+        this.search(this.keyWord);
     }
 };
 </script>
 
 <style scoped>
 .container {
-    background-color: #f4f4f4;
+    background-color: #f6f6f6;
     height: 1500px; /* 设置容器高度为视口高度 */
     overflow-y: auto; /* 启用垂直滚动条 */
 }
@@ -391,5 +238,17 @@ i {
     &.b-l {
         transform: rotate(-180deg);
     }
+}
+
+.image-container {
+    width: 600px;;
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 </style>

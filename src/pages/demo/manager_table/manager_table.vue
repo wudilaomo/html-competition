@@ -18,10 +18,23 @@
                 </template>
                 <template #default="scope">
                     <el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button size="small" type="danger" @click="handleDelete(scope.$index, scope.row)">删除</el-button>
+                    <el-button size="small" type="danger" @click="contentdelete(scope.row.content)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
+        <div class="overlay" v-if="showAlert">
+            <vs-alert style="width: 80%">
+                <template #title>⚠是否删除？</template>
+                <h1>请注意⚠  删除该行数据</h1>
+                <h1>不可撤回</h1>
+                Tips：若出现错误删除导致数据丢失，请联系管理员进行数据修改！
+
+                <template #footer>
+                    <vs-button @click="cancel">Cancel</vs-button>
+                    <vs-button @click="delete1(this.content)">接受删除Accept</vs-button>
+                </template>
+            </vs-alert>
+        </div>
 
         <!-- 分页栏 -->
         <div class="centercon_pagination">
@@ -35,6 +48,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import ManagerTable2 from './manager_table2.vue';
 import information from '../../../api/user';
+import { VsNotification } from 'vuesax-alpha';
 
 export default {
     data() {
@@ -42,7 +56,9 @@ export default {
             search: '',
             tableData: [],
             currentPage: 1,
-            pageSize: 10 // 每页显示的条数
+            pageSize: 20, // 每页显示的条数
+            showAlert: false,
+            content: ''
         };
     },
     computed: {
@@ -53,6 +69,14 @@ export default {
         }
     },
     methods: {
+        identify(duration) {
+            VsNotification({
+                duration,
+                progressAuto: true,
+                title: '删除成功！',
+                content: '若出现错误删除的情况，请联系数据库管理员进行恢复！👉 Moncia:)'
+            });
+        },
         async getGov() {
             const items = await information.getGov();
             this.tableData = items;
@@ -63,8 +87,20 @@ export default {
         handleEdit(index: number, row: any) {
             console.log(index, row);
         },
-        handleDelete(index: number, row: any) {
-            console.log(index, row);
+        contentdelete(content) {
+            console.log('6666666666666666666666666666');
+            this.content = content;
+            this.showAlert = true;
+        },
+        cancel() {
+            this.showAlert = false;
+        },
+        async delete1(content) {
+            console.log('===========delete success!==============');
+            await information.delete1(content);
+            this.showAlert = false;
+            this.getGov();
+            this.identify();
         }
     },
     created() {
@@ -80,5 +116,18 @@ export default {
 }
 .next_page {
     margin-bottom: 10px;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(8px);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 </style>
