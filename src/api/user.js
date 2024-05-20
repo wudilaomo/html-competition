@@ -12,6 +12,15 @@ const information = {
     },
     login(userId, password) {
         return request(`${moduleUrl}/signIn`, { userId, password });
+    },
+    search(keyWord) {
+        return request(`${moduleUrl}/search`, { keyWord });
+    },
+    delete1(content) {
+        return request(`${moduleUrl}/delete1`, { content });
+    },
+    delete2(content) {
+        return request(`${moduleUrl}/delete2`, { content });
     }
 };
 

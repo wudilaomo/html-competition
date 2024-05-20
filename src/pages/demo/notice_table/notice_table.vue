@@ -1,6 +1,6 @@
 <template>
     <h2 class="table-title">最新政策</h2>
-    <el-table :data="tableData" height="250" style="width: 100%">
+    <el-table :data="tableData"  style="width: 100%;height: 85%;">
         <el-table-column prop="address" label="来源" width="180"></el-table-column>
         <el-table-column prop="time" label="发布时间" width="180"></el-table-column>
         <el-table-column prop="content" label="内容">

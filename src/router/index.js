@@ -4,7 +4,10 @@ const routes = [
     {
         path: '/',
         name: '',
-        redirect: '/demo'
+        component: () => import('../pages/demo/demo.vue'),
+        meta: {
+            demo: true
+        }
     },
     {
         path: '/demo',

@@ -10,7 +10,7 @@
                 <div class="NavBan">
                     <div class="ui-component" style="position: absolute; top: 15px; left: 350px">
                         <!-- UI组件的内容 -->
-                        <vs-navbar-item id="guide">
+                        <vs-navbar-item id="guide" @click="godemo">
                             <el-icon style="font-size: 15px"><House /></el-icon>
                             TOP主页
                         </vs-navbar-item>
@@ -18,8 +18,8 @@
                             <el-icon style="font-size: 15px"><Grid /></el-icon>
                             NEW政策
                         </vs-navbar-item>
-                        <vs-navbar-item id="components">
-                            <el-icon style="font-size: 15px"><Tickets /></el-icon>
+                        <vs-navbar-item id="components"@click="gosearch">
+                            <el-icon style="font-size: 15px" ><Tickets /></el-icon>
                             SEARCH成果
                         </vs-navbar-item>
                         <vs-navbar-item id="license">
@@ -31,7 +31,7 @@
             </template>
 
             <template #right>
-                <vs-input v-model="value6" color="#7D33FF" placeholder="Search About 医工融合" class="input-with-icon" @keyup.enter="handleEnter"></vs-input>
+                <vs-input v-model="keyWord" color="#7D33FF" placeholder="Search About 医工融合" class="input-with-icon" @keyup.enter="handleEnter"></vs-input>
                 <el-icon><Search /></el-icon>
                 <el-button v-if="this.$route.query.identify == '001'" type="primary" color="#95d475" class="button-with-margin" @click="goManager">Manager</el-button>
                 <vs-button @click="goUserSignIn">
@@ -47,6 +47,7 @@
                 </el-carousel-item>
             </el-carousel>
         </div>
+        <div style="width: 100%; height: 25%"></div>
         <div class="cardList">
             <div class="Notice_table">
                 <NoticeTable></NoticeTable>
@@ -59,6 +60,11 @@
 
     <div class="chatgpt-image" @click="goGpt">
         <img src="../../../public/5f1b4ff68012141270051c341fe264bd.jpeg" alt="ChatGPT Interface Image" />
+    </div>
+    <div class="foot" style="width: 100%; height: 100px; display: flex; justify-content: center; align-items: center">
+        <a>广东医科大学</a>
+        <a>网站设计大赛作品 Written by：Monica</a>
+        <a>欢迎您的访问</a>
     </div>
 </template>
 
@@ -78,32 +84,32 @@ export default {
     data() {
         return {
             active: null,
-            value6: '',
+            keyWord: '',
             identify: '', // 添加一个变量用来存储iden
             bannerList: [
                 {
                     id: '1',
-                    imgUrl: '../../public/view.jpeg'
+                    imgUrl: '/view.jpeg'
                 },
                 {
                     id: '2',
-                    imgUrl: '../../public/technology.jpeg'
+                    imgUrl: '/technology.jpeg'
                 },
                 {
                     id: '3',
-                    imgUrl: '../../public/mico.jpeg'
+                    imgUrl: '/mico.jpeg'
                 },
                 {
                     id: '4',
-                    imgUrl: '../../public/meeting.jpg'
+                    imgUrl: '/meeting.jpg'
                 },
                 {
                     id: '5',
-                    imgUrl: '../../public/medical.jpg'
+                    imgUrl: '/medical.jpg'
                 },
                 {
                     id: '6',
-                    imgUrl: '../../public/na.png'
+                    imgUrl: '/na.png'
                 }
             ]
         };
@@ -121,9 +127,12 @@ export default {
             this.userInfo = userInfo[0];
         },
 
-        handleEnter(value6) {
-            // 在这里执行跳转操作，比如导航到搜索结果页面
-            this.$router.push('/search');
+        handleEnter(keyWord) {
+            if (keyWord != '') {
+                this.$router.push({ path: '/search', query: { keyWord: this.keyWord } });
+            } else {
+                this.$router.push('/search');
+            }
         },
         goManager() {
             this.$router.push('/Manager');
@@ -133,6 +142,12 @@ export default {
         },
         goUserSignIn() {
             this.$router.push('/user');
+        },
+        godemo(){
+            this.$router.push('/demo');
+        },
+        gosearch(){
+            this.handleEnter()
         }
     }
 };
@@ -140,10 +155,9 @@ export default {
 
 <style scoped>
 .elc {
-    position: absolute;
+    position: relative;
     top: 150px;
-    width: 1500px;
-    height: 200px;
+    width: 90%;
 }
 .el-carousel__item h3 {
     color: #475669;
@@ -163,8 +177,7 @@ export default {
 }
 .container {
     background-color: #f4f4f4;
-    :rgb(73, 80, 96);
-    /* 设置多种颜色值来创建渐变 */
+    height: 1000px;
     margin: 0;
     padding: 0;
     position: relative; /* 设置容器为相对定位 */
@@ -289,8 +302,8 @@ export default {
 
 .cardList {
     width: 85vw;
-    height: 40vh;
-    position: absolute;
+    height: 40%;
+    position: relative;
     bottom: 50px;
 
     display: flex;
@@ -299,6 +312,7 @@ export default {
 
 .Notice_table {
     width: 47%;
+    
     background-color: white; /* 调整背景颜色 */
     padding: 20px; /* 调整内边距 */
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 添加底部阴影效果 */
